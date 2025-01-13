@@ -1,0 +1,27 @@
+<%# <h1>Calculators#index</h1>
+<p>Find me in app/views/calculators/index.html.erb</p> %>
+
+
+<h1>String Calculator</h1>
+
+<%#= form_with url: "/calculate", method: "post", local: true do |form| %>
+<%= form_with url: "/calculators/calculate", method: "post", local: true do |form| %>
+  <div>
+    <%#= form.label :numbers, "Enter numbers (comma-separated or custom delimiter):" %>
+    <%= form.label :numbers, "Enter numbers (comma-separated or custom delimiter):" %><br><br>
+    <%#= form.text_area :numbers, rows: 3, required: true %>
+    <%= form.text_field :numbers %>
+  </div>
+
+  <div>
+    <%= form.submit "Calculate" %>
+  </div>
+<% end %>
+
+<% if @result.present? %>
+  <p><strong>Result:</strong> <%= @result %></p>
+<%# <% end %>
+
+<% elsif @error.present? %>
+  <p style="color: red;"><strong>Error:</strong> <%= @error %></p>
+<% end %>
