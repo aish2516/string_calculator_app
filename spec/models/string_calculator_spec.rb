@@ -1,7 +1,7 @@
 require 'rails_helper'
 require_relative '../../app/models/string_calculator'
 
-Rspec.describe StringCalculator do
+RSpec.describe StringCalculator do
 	let(:calculator) { StringCalculator.new }
 
 
@@ -24,19 +24,28 @@ Rspec.describe StringCalculator do
 		end
 
 		it "handles new lines as delimiters" do
+			# calculator = StringCalculator.new
+			expect(calculator.add("1\n2,3")).to eq(6)
+		end
+
+		it "calculates the sum for numbers with actual newlines" do
 			expect(calculator.add("1\n2,3")).to eq(6)
 		end
 
 		it "supports different custom delimiters" do
-			expect(calculator.add("//;\\n1;2;3")).to eq(6)
+			# calculator = StringCalculator.new
+			# expect(calculator.add("//;\\n1;2;3")).to eq(6)
+			expect(calculator.add("//;\n1;2;3")).to eq(6)
 		end
 
 		it "raises an exception for negative numbers" do
-			expect(calculator.add("1,-2,3")).to raise_error("negative numbers not allowed -2")
+			#calculator = StringCalculator.new
+			expect { calculator.add("1,-2,3") }.to raise_error("negative numbers not allowed -2")
 		end
 
 		it "includes all negative numbers in the exception message" do
-			expect(calculator.add("1,-2,-3,4")).to raise_error("negative numbers not allowed -2,-3")
+			#calculator = StringCalculator.new
+			expect { calculator.add("1,-2,-3,4") }.to raise_error("negative numbers not allowed -2,-3")
 		end
 	end
 end
